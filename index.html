@@ -177,7 +177,22 @@
       setTimeout(() => flower.remove(), 10000);
     }
     setInterval(createPetal, 300);
+  // Particle effect on mousemove
+document.addEventListener('mousemove', function (e) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.textContent = ['🌸', '💖', '✨', '💫'][Math.floor(Math.random() * 4)];
+  particle.style.left = e.pageX + 'px';
+  particle.style.top = e.pageY + 'px';
+  document.body.appendChild(particle);
+  setTimeout(() => {
+    particle.remove();
+  }, 1000);
+});
+
+  
   </script>
+  
 </body>
 
 </html>
