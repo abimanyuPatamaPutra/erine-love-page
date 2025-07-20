@@ -100,6 +100,23 @@
       animation: flowerFall linear infinite;
       z-index: 999;
     }
+
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 12px;
+      opacity: 0.7;
+      animation: fadeOut 0.8s ease-out forwards;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes fadeOut {
+      to {
+        transform: translate(-50%, -100%) scale(0.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -117,7 +134,6 @@
   <canvas id="confetti" class="confetti"></canvas>
 
   <script>
-    // Confetti effect
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
 
@@ -126,7 +142,6 @@
       launchConfetti();
     });
 
-    // Mute button
     const bgm = document.getElementById("bgm");
     const muteBtn = document.getElementById("muteBtn");
 
@@ -135,7 +150,6 @@
       muteBtn.textContent = bgm.muted ? "🔇" : "🔊";
     });
 
-    // Confetti
     function launchConfetti() {
       const canvas = document.getElementById("confetti");
       const ctx = canvas.getContext("2d");
@@ -166,7 +180,6 @@
       draw();
     }
 
-    // Flower petals
     function createPetal() {
       const flower = document.createElement("div");
       flower.classList.add("flower");
@@ -177,22 +190,18 @@
       setTimeout(() => flower.remove(), 10000);
     }
     setInterval(createPetal, 300);
-  // Particle effect on mousemove
-document.addEventListener('mousemove', function (e) {
-  const particle = document.createElement('div');
-  particle.classList.add('particle');
-  particle.textContent = ['🌸', '💖', '✨', '💫'][Math.floor(Math.random() * 4)];
-  particle.style.left = e.pageX + 'px';
-  particle.style.top = e.pageY + 'px';
-  document.body.appendChild(particle);
-  setTimeout(() => {
-    particle.remove();
-  }, 1000);
-});
 
-  
+    document.addEventListener('mousemove', function (e) {
+      const emojiList = ['🌸', '💖', '✨', '💫'];
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+      particle.style.left = e.clientX + 'px';
+      particle.style.top = e.clientY + 'px';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 800);
+    });
   </script>
-  
 </body>
 
 </html>
